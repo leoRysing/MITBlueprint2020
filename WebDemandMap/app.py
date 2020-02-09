@@ -32,7 +32,7 @@ def register():
 
 @app.route('/logout', methods=['POST'])
 def logout():
-    session.pop('username', None)
+    session.pop('Email', None)
     return 'success'
 
 @app.route('/submit', methods=['POST'])
@@ -48,7 +48,7 @@ def sendemail():
 
     subject = "Interest in further services"
     message = request.form.get("message", "default value")
-    body = "Hi there dear user, /n we heard that you expressed in "
+    body = "Hi there dear user, \n we heard that you expressed in " + message + " ! We'll let you know any updates when they come around"
     sender_email = "SupinDemand@gmail.com"
     receiver_email = request.form.get('Email', 'leshaigor@gmail.com')
     password = "MITBlueprint3P"
@@ -57,6 +57,7 @@ def sendemail():
     email["From"] = sender_email
     email["To"] = receiver_email 
     email["Subject"] = subject
+    email.attach(MIMEText(body, "plain"))
     #Create SMTP session for sending the mail
     session = smtplib.SMTP('smtp.gmail.com', 587) #use gmail with port
     session.starttls() #enable security
