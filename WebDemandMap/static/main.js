@@ -13,9 +13,9 @@ $(document).ready(function() {
             document.location.reload();
         });
     });
-    $('#submit').click(function () {
+    $('#request').click(function () {
         const message = $('#message').val();
-        $.post('/message', {
+        $.post('/sendemail', {
             message: message,
         }).done(function () {
             document.location.reload();
