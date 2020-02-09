@@ -25,14 +25,15 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='myStyle.css') }}">
     </head>
     <body>
-        <h1>Peepeepoopoo testing</h1>
+        <h1>Supply, in Demand</h1>
         {% if not loggedIn %}
-        <input id="Email" type="text" placeholder="insert email here" />
+        <input id="email" type="text" placeholder="insert email here" />
         <button id="register">register</button>
         {% else %}
         <p>Hello {{username}}</p>
         <input  id="message" type="text" placeholder="what do you want?" />
         <button id="request">request a location</button>
+        <button id="logout">logout</button>
         {% endif %}
         <div id="map"></div>
         <script src="../static/map.js">

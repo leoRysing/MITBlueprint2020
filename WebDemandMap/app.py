@@ -26,35 +26,37 @@ def home():
         
 @app.route('/register', methods=['POST'])
 def register():
-    session['Email'] = request.form.get('Email', 'test')
+    session['Email'] = request.form.get('Email', '')
     print('Email went through')
     return 'success'
 
-@app.route('/')
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.pop('username', None)
+    return 'success'
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    message = reguest.form.get('message', '')
+    return 'success'
+
 
 @app.route('/sendemail', methods=['POST'])
 def sendemail():
+    print('Mail Sent')
     # assign key email aspects to variables for easier future editing
+
     subject = "Interest in further services"
-    message = request.form.get
+    message = request.form.get("message", "default value")
     body = "Hi there dear user, /n we heard that you expressed in "
-    sender_email = "connerleavitt@gmail.com"
-    receiver_email = "connerleavitt@icloud.com"
-    password = "abc123"
+    sender_email = "SupinDemand@gmail.com"
+    receiver_email = request.form.get('Email', 'leshaigor@gmail.com')
+    password = "MITBlueprint3P"
     # Create the email head (sender, receiver, and subject)
     email = MIMEMultipart()
-    email["From"] = 'demandmap@gmail.com'
+    email["From"] = sender_email
     email["To"] = receiver_email 
     email["Subject"] = subject
-        # Add body and attachment to email
-        #email.attach(MIMEText(body, "plain"))
-        #attach_file = open(file, "rb") # open the file
-        #report = MIMEBase("application", "octate-stream")
-        #report.set_payload((attach_file).read())
-        #encoders.encode_base64(report)
-        #add report header with the file name
-        #report.add_header("Content-Decomposition", "attachment", filename = file)
-        #email.attach(report)
     #Create SMTP session for sending the mail
     session = smtplib.SMTP('smtp.gmail.com', 587) #use gmail with port
     session.starttls() #enable security
@@ -62,6 +64,6 @@ def sendemail():
     text = email.as_string()
     session.sendmail(sender_email, receiver_email, text)
     session.quit()
-    print('Mail Sent')
+    return 'success'
     
 app.run(port=3000, debug=True)

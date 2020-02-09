@@ -15,10 +15,17 @@ $(document).ready(function() {
     });
     $('#request').click(function () {
         const message = $('#message').val();
+        console.log("run")
         $.post('/sendemail', {
             message: message,
         }).done(function () {
             document.location.reload();
         });
     });
+    $('#logout').click(function() {
+        $.post('/logout', {}).done(function() {
+            document.location.reload();
+        });
+    });
 });
+

@@ -1,16 +1,12 @@
 {
-    "type": "FeatureCollection",
-    "features": [
+    "markers":[
       {
-          "type": "Feature",
-          "id": 0,
-          "geometry": {
-              "type": "Point",
-              "coordinates": [
-                42.2863,
-                -71.2312
-              ]
-          }
+        "coords":{"lat":42.2863,"lng":-71.2312},
+        "content":"<h1>Needham bruh School</h1>"
+      },
+      {
+        "coords":{"lat":42.2715,"lng":-71.2438},
+        "content":"<h2>joey home joey home</h2>"
       }
     ]
-  }
+}
