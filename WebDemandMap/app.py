@@ -12,6 +12,7 @@ from email.mime.text import MIMEText
 app = Flask(__name__)
 app.secret_key = "thasasp1cymeatball"
 
+email = ""
 #messages = []
 
 @app.route('/', methods=['GET'])
@@ -26,7 +27,7 @@ def home():
         
 @app.route('/register', methods=['POST'])
 def register():
-    session['Email'] = request.form.get('Email', '')
+    session['Email'] = session.get('Email', '')
     print('Email went through')
     return 'success'
 
