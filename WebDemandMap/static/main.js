@@ -1,9 +1,9 @@
 // stuff
 $(document).ready(function() {
     $('#register').click(function() {
-        const email = $('#email').val();
+        const Email = $('#Email').val();
         $.post('/register', {
-            email: email,
+            Email: Email,
         }).done(function () {
             document.location.reload();
         });
