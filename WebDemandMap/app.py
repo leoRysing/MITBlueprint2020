@@ -3,6 +3,7 @@ from flask import Flask, render_template, session, request
 #from pymongo import MongoClient
 #leroy is tremendously cute
 app = Flask(__name__)
+app.secret_key = "thasasp1cymeatball"
 
 #messages = []
 
