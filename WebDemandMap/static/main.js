@@ -1,9 +1,10 @@
 // stuff
 $(document).ready(function() {
     $('#register').click(function() {
-        const Email = $('#Email').val();
+        const email = $('#email').val();
+        console.log(email);
         $.post('/register', {
-            Email: Email,
+            email: email,
         }).done(function () {
             document.location.reload();
         });
@@ -14,10 +15,17 @@ $(document).ready(function() {
         });
     });
     $('#request').click(function () {
+        const email = $('#email').val();
+        console.log("got here")
         const message = $('#message').val();
+        /*const geotag = $localStorage.getItem("marker");*/
+        const geotag = "12.345, 67.8910"
+        console.log("got here two")
         console.log("run")
-        $.post('/sendemail', {
+        $.post('/submit', {
+            email: email,
             message: message,
+            geotag: geotag,
         }).done(function () {
             document.location.reload();
         });

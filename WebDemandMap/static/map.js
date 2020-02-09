@@ -6,43 +6,60 @@ function initMap() {
         zoom: 14
     });
 
-    var markers = [
-        {
-            coords:{lat:42.2863,lng:-71.2312},
-            /*iconImage:{
-                url:'https://lh3.googleusercontent.com/proxy/qfaafYlkDkXNhtxMYNKdKogCaVSCejQY_Y4hy6D58vCB1eze37wdIGKdoAXpapOvPSf-IhiE5wOZKoisvRuQtXTqDZRFF4HFuhieyMQ',
-                size: new google.maps.Size(20, 32),
-                //origin: new google.maps.Point(0, 0),
-                //anchor: new google.maps.Point(0, 32)
-            },*/
-            content:'<h1>Needham bruh School</h1>'
-        },
-        {
-            coords:{lat:42.2715,lng:-71.2438},
-            content:'<h2>joey home joey home</h2>'
-        }
-    ];
 
-    for(var i = 0; i < markers.length; i++){
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            map.setCenter(pos);
+        }
+        );
+    }
+
+
+    /*let requestURL = "../data/locations.json"
+    let request = new XMLHttpRequest();
+    request.open('GET', requestURL)
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+        const superHeroes = request.response;
+    }
+    */
+
+
+    /*
+    for (var i = 0; i < markers.length; i++) {
         addMarker(markers[i]);
     }
 
-    function addMarker(props){
+    //cluster markers
+    var markerCluster = new MarkerClusterer(map, markers,
+        { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+
+    */
+
+    function addMarker(props) {
         var marker = new google.maps.Marker({
-            position:props.coords,
-            map:map,
+            position: props.coords,
+            map: map,
         });
 
-        if(props.iconImage){
+        if (props.iconImage) {
             marker.setIcon(props.iconImage);
         }
 
-        if(props.content){
+        if (props.content) {
             var infoWindow = new google.maps.InfoWindow({
-                content:props.content
+                content: props.content
             });
 
-            marker.addListener('click', function(){
+            marker.addListener('click', function () {
                 infoWindow.open(map, marker);
             });
         }
@@ -51,6 +68,7 @@ function initMap() {
     map.addListener('click', function (e) {
         placeMarker(e.latLng, map);
     });
+    console.log("ReadTextClosed");
 }
 
 function placeMarker(latLng, map) {
